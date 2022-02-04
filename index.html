@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./App/Styles/loading.css">
+    <link rel="stylesheet" href="./App/Styles/style.css">
+    <title>Pacman</title>
+</head>
+<body onload="loadingFunction()">
+   <div class="loading-screen" id="loading-screen">
+    <div class="pacman-upper-mouth">
+    </div>
+    <div class="pacman-lower-mouth">
+    </div>
+   </div>
+
+   <div class="wrapper" id="wrapper" style="display: none;">
+        <div id="game"></div>
+        <div id="score"></div>
+        <button id="start-button">Start Game</button>
+   </div>
+
+   <script>
+       var loadingVar;
+       function loadingFunction(){
+        loadingVar = setTimeout(showPage, Math.floor(Math.random() * 5000));
+       }
+
+       function showPage(){
+           document.getElementById('loading-screen').style.display = 'none';
+           document.getElementById('wrapper').style.display = 'block';
+       }
+   </script>
+   <script src="./App/Scripts/index.js"></script>
+</body>
+</html>

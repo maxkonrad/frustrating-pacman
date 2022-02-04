@@ -3,12 +3,18 @@
     box-sizing: border-box;
   }
 
+  body {
+    background-size: cover;
+  }
+
 #wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  position: absolute;
   justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 #game {

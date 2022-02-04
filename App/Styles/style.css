@@ -5,6 +5,7 @@
 
   body {
     background-size: cover;
+    overflow: hidden;
   }
 
 #wrapper {
@@ -45,7 +46,7 @@
   justify-content: center;
   width: 200px;
   height: 50px;
-  border: 5px darkblue solid;
+  border: 5px red solid;
   background: black;
   margin-top: 20px;
   color: white;

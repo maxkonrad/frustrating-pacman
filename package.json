@@ -1,0 +1,19 @@
+{
+  "name": "frustrating-pacman",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxkonrad/frustrating-pacman.git"
+  },
+  "author": "Furkan Selek, Doğukan Topçu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxkonrad/frustrating-pacman/issues"
+  },
+  "homepage": "https://github.com/maxkonrad/frustrating-pacman#readme"
+}

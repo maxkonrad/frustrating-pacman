@@ -1,9 +1,8 @@
-
 * {
     box-sizing: border-box;
   }
 
-  body {
+body {
     background-size: cover;
     overflow: hidden;
   }
@@ -137,7 +136,9 @@ background: cyan;
 .clyde {
 background: orange;
 }
-
+.teleport{
+  background: black;
+}
 
 @keyframes chew {
     50% {

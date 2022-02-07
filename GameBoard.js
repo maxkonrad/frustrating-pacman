@@ -1,55 +1,72 @@
-import { GRID_SIZE, CELL_SIZE, OBJECT_TYPE, CLASS_LIST } from "./setup.js";
+import { GRID_SIZE, CELL_SIZE, OBJECT_TYPE, CLASS_LIST } from './setup.js';
 
-class GameBoard {
-    constructor(DOM_GRID){
-        this.dotCount = 0,
-        this.grid = [],
-        this.DOM_GRID = DOM_GRID
-    }
-
-    showGameStatus(gameWin){
-        const div = document.createElement('div')
-        div.classList.add('game-status')
-        div.innerHTML = `${gameWin ? 'WIN' : 'GAME OVER'}`
-        this.DOM_GRID.appendChild(div);
-    }
-
-    createGrid(level){
+class GameBoard{
+    constructor(map){
+        this.grid = []
         this.dotCount = 0;
-        this.grid = [];
-        this.DOM_GRID.innerHTML = ''
-        this.DOM_GRID.style.cssText = `grid-template-columns: repeat(${GRID_SIZE}, ${CELL_SIZE}px)`
+        this.map = map
+    }
+    createMap(level){
+        this.dotCount = 0
+        this.grid = []
+        this.map.innerHTML = ''
+        this.map.style.cssText = `grid-template-columns: repeat(${GRID_SIZE}, ${CELL_SIZE}px)`
         level.forEach(square => {
-            const squareDiv = document.createElement('div')
-            squareDiv.classList.add('square', CLASS_LIST[square])
-            squareDiv.style.cssText = `width:${CELL_SIZE}px; height:${CELL_SIZE}px`
-            this.DOM_GRID.appendChild(squareDiv)
-            this.grid.push(squareDiv);
-            if (CLASS_LIST[square] === OBJECT_TYPE.DOT) {
-                this.dotCount++
-            }
+            const newSquare = document.createElement('div')
+            newSquare.classList.add('square', CLASS_LIST[square])
+            newSquare.style.cssText = `width: ${CELL_SIZE}px; height: ${CELL_SIZE}px`
+            this.map.appendChild(newSquare)
+            this.grid.push(newSquare)
         });
     }
 
-    addObject(pos, classes){
-        this.grid[pos].classList.add(...classes)
-    }
-    removeObject(pos, classes){
-        this.grid[pos].classList.remove(...classes)
-    }
-    objectExist(pos, object){
-        return this.grid[pos].classList.contains(object)
+
+    addObject(pos, objectClasses){
+        this.grid[pos].classList.add(...objectClasses)
     }
 
-    rotateDiv(pos, deg){
-         this.grid[pos].style.transform = `rotate(${deg}deg)`
+    removeObject(pos, objectClasses){
+        this.grid[pos].classList.remove(...objectClasses)
     }
 
-    static createGameBoard(DOMGrid, level){
-        const board = new this(DOMGrid)
-        board.createGrid(level)
+    objectExists(nextPos, object){
+        return this.grid[nextPos].classList.contains(object)
+    }
+
+    rotateObject(character){
+        let nextPos = character.getNextPos(this.objectExists.bind(this))
+        if (nextPos == character.pos) {   
+            this.grid[nextPos].style.transform = `rotate(${character.rotation}deg)`
+        }
+        else{
+            this.grid[nextPos].style.transform = `rotate(${character.rotation}deg)`
+            this.grid[character.pos].style.transform = `rotate(0)`
+        }
+    }
+
+    moveObject(character){
+        if (true) {
+            const nextPos = character.getNextPos(this.objectExists.bind(this))
+            this.removeObject(character.pos, [character.type])
+            this.addObject(nextPos, [character.type])
+            // if (character.canRotate && nextPos !== this.pos) {
+            //     this.rotateObject(nextPos, character.rotation)
+            //     this.rotateObject(character.pos, 0);
+            // }
+            // else{
+            //    
+            // }
+            character.pos = nextPos
+        }
+    }
+
+    static createGameBoard(map, level){
+        const board = new this(map)
+        board.createMap(level)
         return board
     }
+
+
 }
 
-export default GameBoard;
+export default GameBoard

@@ -1,16 +1,16 @@
 export const GRID_SIZE = 20;
 export const CELL_SIZE = 20;
 
-export const DIRECTIONS = {
-    LShift: {
-        rotation : 270,
+export const KEYS = {
+    ShiftLeft: {
+        rotation : -90,
         code : "ShiftRight",
         keyCode : {
             number : 16,
             location: 1
         }
     },
-    RShift: {
+    ShiftRight: {
         rotation : 90,
         code : "ShiftRight",
         keyCode : {
@@ -18,6 +18,13 @@ export const DIRECTIONS = {
             location : 2
         }
     }
+}
+
+export const DIRECTIONS = {
+    UP : -GRID_SIZE,
+    RIGHT : 1,
+    DOWN : GRID_SIZE,
+    LEFT : -1
 }
 
 export const OBJECT_TYPE = {

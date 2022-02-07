@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>PACMAN</title>
 </head>
-<body onload="loadingFunction()">
+<body>
    <div class="loading-screen" id="loading-screen">
     <div class="pacman-upper-mouth">
     </div>
@@ -24,15 +24,6 @@
    </div>
 
    <script>
-       var loadingVar;
-       function loadingFunction(){
-        loadingVar = setTimeout(showPage, Math.floor(Math.random() * 5000));
-       }
-
-       function showPage(){
-           document.getElementById('loading-screen').style.display = 'none';
-           document.getElementById('wrapper').style.display = 'flex';
-       }
    </script>
    <script src="./index.js"></script>
    <script src="./setup.js"></script>

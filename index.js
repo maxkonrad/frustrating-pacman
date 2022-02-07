@@ -145,3 +145,11 @@ function startGame() {
 }
 
 startButton.addEventListener('click', startGame)
+
+
+function showPage(){
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('wrapper').style.display = 'flex';
+}
+
+setTimeout(showPage, Math.floor(Math.random() * 5000));

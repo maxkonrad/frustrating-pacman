@@ -6,6 +6,14 @@ class GameBoard{
         this.dotCount = 0;
         this.map = map
     }
+
+    showGameStatus(gameWin) {
+        const div = document.createElement('div');
+        div.classList.add('game-status');
+        div.innerHTML = `${gameWin ? 'WIN!' : 'GAME OVER!'}`;
+        this.map.appendChild(div);
+      }
+
     createMap(level){
         this.dotCount = 0
         this.grid = []

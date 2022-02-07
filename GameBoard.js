@@ -17,6 +17,7 @@ class GameBoard{
             newSquare.style.cssText = `width: ${CELL_SIZE}px; height: ${CELL_SIZE}px`
             this.map.appendChild(newSquare)
             this.grid.push(newSquare)
+            if (CLASS_LIST[square] === OBJECT_TYPE.DOT) this.dotCount++;
         });
     }
 
@@ -33,29 +34,25 @@ class GameBoard{
         return this.grid[nextPos].classList.contains(object)
     }
 
-    rotateObject(character){
-        let nextPos = character.getNextPos(this.objectExists.bind(this))
-        if (nextPos == character.pos) {   
-            this.grid[nextPos].style.transform = `rotate(${character.rotation}deg)`
-        }
-        else{
-            this.grid[nextPos].style.transform = `rotate(${character.rotation}deg)`
-            this.grid[character.pos].style.transform = `rotate(0)`
-        }
+    rotateObject(pos, degree){
+        this.grid[pos].style.transform = `rotate(${degree}deg)`
     }
 
     moveObject(character){
-        if (true) {
+        if (character.moveCheck()) {
             const nextPos = character.getNextPos(this.objectExists.bind(this))
-            this.removeObject(character.pos, [character.type])
-            this.addObject(nextPos, [character.type])
-            // if (character.canRotate && nextPos !== this.pos) {
-            //     this.rotateObject(nextPos, character.rotation)
-            //     this.rotateObject(character.pos, 0);
-            // }
-            // else{
-            //    
-            // }
+            if (character.canRotate && (nextPos !== character.pos)){
+                this.rotateObject(character.pos, 0)
+            }
+            if (!character.canRotate) {
+                const { classesToRemove, classesToAdd } = character.makeMove()
+                this.removeObject(character.pos, classesToRemove)
+                this.addObject(nextPos, classesToAdd)
+            }
+            if (character.canRotate) {
+                this.removeObject(character.pos, [character.type])
+                this.addObject(nextPos, [character.type])
+            }
             character.pos = nextPos
         }
     }

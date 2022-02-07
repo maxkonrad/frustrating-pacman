@@ -12,11 +12,7 @@ class Pacman  {
     }
 
     moveCheck(){
-        if (this.timer === this.speed) {
-            this.timer = 0;
-            return true;
-          }
-          this.timer++;
+        return true
     }
 
     handleRotation = (e, objectExists) => {
@@ -34,11 +30,11 @@ class Pacman  {
     
     getNextPos(objectExists){
         if (this.rotation == 90 || this.rotation == -270) {
-            this.dir = DIRECTIONS.DOWN}
+            this.dir = DIRECTIONS.UP}
         if (this.rotation == 0 || this.rotation == 360) {
             this.dir = DIRECTIONS.RIGHT}
         if (this.rotation == 270 || this.rotation == -90) {
-            this.dir = DIRECTIONS.UP}
+            this.dir = DIRECTIONS.DOWN}
         if (this.rotation == 180 || this.dir == -180) {
             this.dir = DIRECTIONS.LEFT}
         this.rotation = this.rotation % 360

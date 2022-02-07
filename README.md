@@ -1,6 +1,6 @@
 # frustrating-pacman
 ## Installation
-```npm -i```
+```npm i```
 ## Start
 ```npm start```
 ## IMPORTANT

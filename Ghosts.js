@@ -1,11 +1,12 @@
 import { DIRECTIONS, OBJECT_TYPE } from './setup';
 
 class Ghost{
-    constructor(speed = 5, startPos, movement, name){
+    constructor(speed, startPos, movement, name){
         this.speed = speed
         this.pos = startPos
         this.movement = movement
         this.name = name
+        this.rotation = 0
         this.dir = DIRECTIONS.RIGHT
         this.timer = 0
         this.isScared = false

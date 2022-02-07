@@ -1,52 +1,63 @@
-import { OBJECT_TYPE, DIRECTIONS, KEYS} from "./setup.js"
+import { OBJECT_TYPE, DIRECTIONS } from './setup';
 
-class Pacman  {
-    constructor(startPos, speed){
-        this.speed = speed
-        this.canRotate = true
-        this.rotation = 0
-        this.type = OBJECT_TYPE.PACMAN
-        this.timer = 0
-        this.dir = null
-        this.pos = startPos
+class Pacman {
+  constructor(speed, startPos) {
+    this.pos = startPos;
+    this.speed = speed;
+    this.dir = null;
+    this.timer = 0;
+    this.powerPill = false;
+    this.rotation = true;
+  }
+
+  shouldMove() {
+    // Don't move before a key is pressed
+    if (!this.dir) return;
+
+    if (this.timer === this.speed) {
+      this.timer = 0;
+      return true;
+    }
+    this.timer++;
+  }
+
+  getNextMove(objectExist) {
+    let nextMovePos = this.pos + this.dir.movement;
+    // Do we collide with a wall?
+    if (
+      objectExist(nextMovePos, OBJECT_TYPE.WALL) ||
+      objectExist(nextMovePos, OBJECT_TYPE.GHOSTLAIR)
+    ) {
+      nextMovePos = this.pos;
     }
 
-    moveCheck(){
-        return true
+    return { nextMovePos, direction: this.dir };
+  }
+
+  makeMove() {
+    const classesToRemove = [OBJECT_TYPE.PACMAN];
+    const classesToAdd = [OBJECT_TYPE.PACMAN];
+
+    return { classesToRemove, classesToAdd };
+  }
+
+  setNewPos(nextMovePos) {
+    this.pos = nextMovePos;
+  }
+
+  handleKeyInput = (e, objectExist) => {
+    let dir;
+
+    if (e.keyCode >= 37 && e.keyCode <= 40) {
+      dir = DIRECTIONS[e.key];
+    } else {
+      return;
     }
 
-    handleRotation = (e, objectExists) => {
-        if (e.key == 'Shift'){
-            this.rotation += KEYS[e.code].rotation
-            if (this.rotation < 0){
-                this.rotation = 360 - this.rotation
-            }
-        }
-        else {
-            return
-        }
-        const nextPos = this.pos + this.dir
-        if (objectExists(nextPos, OBJECT_TYPE.WALL)) {
-            return
-        }
-    }
-
-    getNextPos(objectExists){
-        if (this.rotation % 360 == 90) {
-            this.dir = DIRECTIONS.UP}
-        if (this.rotation % 360 == 0 || this.rotation == 360) {
-            this.dir = DIRECTIONS.RIGHT}
-        if (this.rotation % 360 == 270 || this.rotation == -90) {
-            this.dir = DIRECTIONS.DOWN}
-        if (this.rotation % 360 == 180 || this.dir == -180) {
-            this.dir = DIRECTIONS.LEFT}
-
-        let nextPos = this.pos + this.dir
-        if (objectExists(nextPos, OBJECT_TYPE.WALL) || objectExists(nextPos, OBJECT_TYPE.GHOSTLAIR)){
-            nextPos = this.pos
-        }
-        return nextPos
-    }
+    const nextMovePos = this.pos + dir.movement;
+    if (objectExist(nextMovePos, OBJECT_TYPE.WALL)) return;
+    this.dir = dir;
+  };
 }
 
-export default Pacman
+export default Pacman;

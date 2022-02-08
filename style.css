@@ -76,13 +76,13 @@ body {
 }
 
 .dot {
-  background: white;
+  background: rgb(255, 255, 0);
   border: 8px solid black;
   border-radius: 50%;
 }
 
 .pill {
-  background: white;
+  background: rgb(255, 0, 0);
   border: 5px solid black;
   border-radius: 50%;
 }

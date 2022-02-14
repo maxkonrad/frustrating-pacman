@@ -26,7 +26,8 @@ class Ghost {
     const { nextMovePos, direction } = this.movement(
       this.pos,
       this.dir,
-      objectExist
+      objectExist,
+      "Normal"
     );
     return { nextMovePos, direction };
   }

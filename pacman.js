@@ -49,7 +49,10 @@ class Pacman {
     let dir;
 
     if (e.keyCode >= 37 && e.keyCode <= 40) {
-      dir = DIRECTIONS[e.key];
+      let percentage = Math.round(Math.random() * 99) + 1
+      if (percentage >= 20){
+        dir = DIRECTIONS[e.key];
+      }
     } else {
       return;
     }

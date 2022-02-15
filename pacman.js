@@ -57,9 +57,8 @@ class Pacman {
       if(this.bugStatus == false){
         this.dir = dir;
       }
-      if (percentage >= 35 && this.bugStatus == true){
+      if (percentage >= 25 && this.bugStatus == true){
         this.dir = dir;
-        console.log(this.bugStatus)
       }
     } 
     const nextMovePos = this.pos + dir.movement;

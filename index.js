@@ -25,6 +25,8 @@ let gameWin = false;
 let powerPillActive = false;
 let powerPillTimer = null;
 
+const alertBool = true
+
 // --- AUDIO --- //
 function playAudio(audio) {
   const soundEffect = new Audio(audio);
@@ -116,6 +118,11 @@ function gameLoop(pacman, ghosts) {
   if (gameBoard.dotCount <= 130) {
     pacman.bugStatus = true
   }
+  if (gameBoard.dotCount == 110) {
+    //make ghosts focus on player
+     
+  }
+  
 }
 
 function startGame() {

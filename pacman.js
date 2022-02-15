@@ -8,6 +8,7 @@ class Pacman {
     this.timer = 0;
     this.powerPill = false;
     this.rotation = true;
+    this.bugStatus = false
   }
 
   shouldMove() {
@@ -18,7 +19,9 @@ class Pacman {
       this.timer = 0;
       return true;
     }
-    this.timer++;
+    let percentage = Math.round(Math.random() * 99) + 1
+    this.timer++
+    
   }
 
   getNextMove(objectExist) {
@@ -50,16 +53,18 @@ class Pacman {
 
     if (e.keyCode >= 37 && e.keyCode <= 40) {
       let percentage = Math.round(Math.random() * 99) + 1
-      if (percentage >= 20){
-        dir = DIRECTIONS[e.key];
+      dir = DIRECTIONS[e.key];
+      if(this.bugStatus == false){
+        this.dir = dir;
       }
-    } else {
-      return;
-    }
-
+      if (percentage >= 35 && this.bugStatus == true){
+        this.dir = dir;
+        console.log(this.bugStatus)
+      }
+    } 
     const nextMovePos = this.pos + dir.movement;
+
     if (objectExist(nextMovePos, OBJECT_TYPE.WALL)) return;
-    this.dir = dir;
   };
 }
 

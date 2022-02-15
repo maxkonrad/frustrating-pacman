@@ -113,6 +113,9 @@ function gameLoop(pacman, ghosts) {
   }
   // 9. Show new score
   scoreTable.innerHTML = score;
+  if (gameBoard.dotCount <= 130) {
+    pacman.bugStatus = true
+  }
 }
 
 function startGame() {

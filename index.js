@@ -25,7 +25,7 @@ let gameWin = false;
 let powerPillActive = false;
 let powerPillTimer = null;
 
-const alertBool = true
+let alertBool = true
 
 // --- AUDIO --- //
 function playAudio(audio) {
@@ -118,11 +118,10 @@ function gameLoop(pacman, ghosts) {
   if (gameBoard.dotCount <= 130) {
     pacman.bugStatus = true
   }
-  if (gameBoard.dotCount == 110) {
-    //make ghosts focus on player
-     
+  if (gameBoard.dotCount == 90 && alertBool) {
+    alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
+    alertBool = false
   }
-  
 }
 
 function startGame() {

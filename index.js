@@ -125,7 +125,7 @@ function gameLoop(pacman, ghosts) {
     alertBool = false
   }
 
-  if (gameBoard.dotCount == 100){
+  if (gameBoard.dotCount == 80){
   ghosts.forEach((ghost) => ghost.movement = huntMovement)
   }
 }

@@ -53,7 +53,6 @@ export function huntMovement(position, direction, objectExist, pacman){
   }
   dir = nextMovePos - position
   return { nextMovePos, direction: dir}
-  
 }
 
 function isCloser(pacmanPos, position, nextMovePos) {

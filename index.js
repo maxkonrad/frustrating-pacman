@@ -1,5 +1,7 @@
 import { LEVEL, OBJECT_TYPE } from './setup';
-import { randomMovement } from './ghostMovement';
+import { randomMovement, huntMovement } from './ghostMovement';
+
+
 // Classes
 import GameBoard from './GameBoard';
 import Pacman from './pacman.js';
@@ -122,6 +124,10 @@ function gameLoop(pacman, ghosts) {
     alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
     alertBool = false
   }
+
+  if (gameBoard.dotCount == 100){
+  ghosts.forEach((ghost) => ghost.movement = huntMovement)
+  }
 }
 
 function startGame() {
@@ -143,10 +149,10 @@ function startGame() {
   );
 
   const ghosts = [
-    new Ghost(5, 188, randomMovement, OBJECT_TYPE.BLINKY, ),
-    new Ghost(4, 209, randomMovement, OBJECT_TYPE.PINKY),
-    new Ghost(3, 230, randomMovement, OBJECT_TYPE.INKY),
-    new Ghost(2, 251, randomMovement, OBJECT_TYPE.CLYDE)
+    new Ghost(5, 188, randomMovement, OBJECT_TYPE.BLINKY, pacman),
+    new Ghost(4, 209, randomMovement, OBJECT_TYPE.PINKY, pacman),
+    new Ghost(3, 230, randomMovement, OBJECT_TYPE.INKY, pacman),
+    new Ghost(2, 251, randomMovement, OBJECT_TYPE.CLYDE, pacman)
   ];
 
   // Gameloop

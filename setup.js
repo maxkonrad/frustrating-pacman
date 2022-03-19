@@ -78,3 +78,5 @@ export const LEVEL = [
   1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
+
+export const MSG = ["Hey, you really are bad at this, aren't you?", "Come on... Is it that complicated?", "I guess, you will not win this game.", "Will we wait till morning?"]

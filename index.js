@@ -117,7 +117,7 @@ function gameLoop(pacman, ghosts) {
   }
   // 9. Show new score
   scoreTable.innerHTML = score;
-  if (gameBoard.dotCount <= 130) {
+  if (gameBoard.dotCount <= 150) {
     pacman.bugStatus = true
   }
   if (gameBoard.dotCount == 90 && alertBool) {
@@ -125,7 +125,7 @@ function gameLoop(pacman, ghosts) {
     alertBool = false
   }
 
-  if (gameBoard.dotCount == 80){
+  if (gameBoard.dotCount == 140){
   ghosts.forEach((ghost) => ghost.movement = huntMovement)
   }
 }

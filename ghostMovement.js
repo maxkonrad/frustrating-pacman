@@ -40,7 +40,6 @@ export function huntMovement(position, direction, objectExist, pacman){
     if(!(objectExist(nextMovePos, OBJECT_TYPE.WALL) || objectExist(nextMovePos, OBJECT_TYPE.GHOST))){
       validMoves.push(nextMovePos)
     }
-
   });
   let attempts = 10
   nextMovePos = validMoves[Math.floor(Math.random() * validMoves.length)]

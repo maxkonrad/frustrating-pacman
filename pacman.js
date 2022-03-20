@@ -57,7 +57,7 @@ class Pacman {
       if(this.bugStatus == false){
         this.dir = dir;
       }
-      if (percentage >= 13 && this.bugStatus == true){
+      if (percentage >= 14 && this.bugStatus == true){
         this.dir = dir;
       }
     } 

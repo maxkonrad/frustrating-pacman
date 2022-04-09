@@ -76,6 +76,22 @@ function gameLoop(pacman, ghosts) {
   gameBoard.moveCharacter(pacman);
   // 2. Check Ghost collision on the old positions
   checkCollision(pacman, ghosts);
+  //2.1 Check ghost move and bugs
+  if (gameBoard.dotCount <= 150) {
+    pacman.bugStatus = true
+  }
+  if (gameBoard.dotCount == 90 && alertBool) {
+    alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
+    alertBool = false
+  }
+
+  if (gameBoard.dotCount <= 140 && !powerPillActive){
+    ghosts.forEach((ghost) => ghost.movement = huntMovement)
+  }
+  if(powerPillActive){
+    ghosts.forEach((ghost) => ghost.movement = randomMovement)
+  }
+
   // 3. Move ghosts
   ghosts.forEach((ghost) => gameBoard.moveCharacter(ghost));
   // 4. Do a new ghost collision check on the new positions
@@ -117,20 +133,7 @@ function gameLoop(pacman, ghosts) {
   }
   // 9. Show new score
   scoreTable.innerHTML = score;
-  if (gameBoard.dotCount <= 150) {
-    pacman.bugStatus = true
-  }
-  if (gameBoard.dotCount == 90 && alertBool) {
-    alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
-    alertBool = false
-  }
-
-  if (gameBoard.dotCount <= 140 && !powerPillActive){
-    ghosts.forEach((ghost) => ghost.movement = huntMovement)
-  }
-  if(powerPillActive){
-    ghosts.forEach((ghost) => ghost.movement = randomMovement)
-  }
+  
 }
 
 function startGame() {

@@ -125,8 +125,11 @@ function gameLoop(pacman, ghosts) {
     alertBool = false
   }
 
-  if (gameBoard.dotCount == 140){
-  ghosts.forEach((ghost) => ghost.movement = huntMovement)
+  if (gameBoard.dotCount <= 140 && !powerPillActive){
+    ghosts.forEach((ghost) => ghost.movement = huntMovement)
+  }
+  else {
+    ghosts.forEach((ghost) => (ghost.movement = randomMovement))
   }
 }
 

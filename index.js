@@ -72,32 +72,29 @@ function checkCollision(pacman, ghosts) {
 }
 
 function gameLoop(pacman, ghosts) {
+  if (!pacman.powerPill && gameBoard.dotCount < 150) {
+    ghosts.forEach((ghost) => ghost.movement = huntMovement)
+    console.log("power pill inactive")
+  }
   // 1. Move Pacman
   gameBoard.moveCharacter(pacman);
   // 2. Check Ghost collision on the old positions
   checkCollision(pacman, ghosts);
   //2.1 Check ghost move and bugs
-  if (gameBoard.dotCount <= 150) {
+  if (gameBoard.dotCount == 150) {
     pacman.bugStatus = true
   }
   if (gameBoard.dotCount == 90 && alertBool) {
     alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
     alertBool = false
   }
-
-  if (gameBoard.dotCount <= 140 && !powerPillActive){
-    ghosts.forEach((ghost) => ghost.movement = huntMovement)
-  }
-  if(powerPillActive){
-    ghosts.forEach((ghost) => ghost.movement = randomMovement)
-  }
-
   // 3. Move ghosts
   ghosts.forEach((ghost) => gameBoard.moveCharacter(ghost));
   // 4. Do a new ghost collision check on the new positions
   checkCollision(pacman, ghosts);
   // 5. Check if Pacman eats a dot
   if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.DOT)) {
+
     playAudio(soundDot);
 
     gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.DOT]);
@@ -112,17 +109,18 @@ function gameLoop(pacman, ghosts) {
 
     gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.PILL]);
 
+    ghosts.forEach((ghost) => (ghost.movement = randomMovement))
+
     pacman.powerPill = true;
     score += 50;
 
     clearTimeout(powerPillTimer);
-    powerPillTimer = setTimeout(
-      () => (pacman.powerPill = false),
-      POWER_PILL_TIME
-    );
+    powerPillTimer = setTimeout(async function () {
+      pacman.powerPill = false
+    }, POWER_PILL_TIME);
   }
   // 7. Change ghost scare mode depending on powerpill
-  if (pacman.powerPill !== powerPillActive) {
+  if (pacman.powerPill != powerPillActive) {
     powerPillActive = pacman.powerPill;
     ghosts.forEach((ghost) => (ghost.isScared = pacman.powerPill));
   }

@@ -72,10 +72,6 @@ function checkCollision(pacman, ghosts) {
 }
 
 function gameLoop(pacman, ghosts) {
-  if (!pacman.powerPill && gameBoard.dotCount < 150) {
-    ghosts.forEach((ghost) => ghost.movement = huntMovement)
-    console.log("power pill inactive")
-  }
   // 1. Move Pacman
   gameBoard.moveCharacter(pacman);
   // 2. Check Ghost collision on the old positions
@@ -109,15 +105,14 @@ function gameLoop(pacman, ghosts) {
 
     gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.PILL]);
 
-    ghosts.forEach((ghost) => (ghost.movement = randomMovement))
-
     pacman.powerPill = true;
     score += 50;
 
     clearTimeout(powerPillTimer);
-    powerPillTimer = setTimeout(async function () {
+    
+    powerPillTimer = setTimeout(() => (
       pacman.powerPill = false
-    }, POWER_PILL_TIME);
+    ), POWER_PILL_TIME);
   }
   // 7. Change ghost scare mode depending on powerpill
   if (pacman.powerPill != powerPillActive) {
@@ -153,14 +148,15 @@ function startGame() {
   );
 
   const ghosts = [
-    new Ghost(5, 188, randomMovement, OBJECT_TYPE.BLINKY, pacman),
-    new Ghost(4, 209, randomMovement, OBJECT_TYPE.PINKY, pacman),
-    new Ghost(3, 230, randomMovement, OBJECT_TYPE.INKY, pacman),
-    new Ghost(2, 251, randomMovement, OBJECT_TYPE.CLYDE, pacman)
+    new Ghost(5, 188, huntMovement, OBJECT_TYPE.BLINKY, pacman),
+    new Ghost(4, 209, huntMovement, OBJECT_TYPE.PINKY, pacman),
+    new Ghost(3, 230, huntMovement, OBJECT_TYPE.INKY, pacman),
+    new Ghost(2, 251, huntMovement, OBJECT_TYPE.CLYDE, pacman)
   ];
 
   // Gameloop
   timer = setInterval(() => gameLoop(pacman, ghosts), GLOBAL_SPEED);
+
 }
 
 // Initialize game

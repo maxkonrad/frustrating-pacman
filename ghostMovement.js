@@ -32,6 +32,10 @@ export function randomMovement(position, direction, objectExist, pacman) {
 export function huntMovement(position, direction, objectExist, pacman){
   let dir = direction
   const keys = Object.keys(DIRECTIONS);
+  let decision = false
+  if (!pacman.powerPill){
+    decision = true 
+  }
   let validMoves = []
   let nextMovePos = position + dir.movement;
   keys.forEach(key => {
@@ -45,7 +49,7 @@ export function huntMovement(position, direction, objectExist, pacman){
   nextMovePos = validMoves[Math.floor(Math.random() * validMoves.length)]
   let isClose = isCloser(pacman.pos, position, nextMovePos)
   while(
-    (true ? isClose : !isClose) && attempts) {
+    (decision ? isClose : !isClose) && attempts) {
     nextMovePos = validMoves[Math.floor(Math.random() * validMoves.length)]
     isClose = isCloser(pacman.pos, position, nextMovePos)
     attempts--

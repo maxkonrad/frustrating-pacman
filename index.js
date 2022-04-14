@@ -78,7 +78,7 @@ function gameLoop(pacman, ghosts) {
   // 2. Check Ghost collision on the old positions
   checkCollision(pacman, ghosts);
   //2.1 Check ghost move and bugs
-  if (gameBoard.dotCount == 150) {
+  if (gameBoard.dotCount == 160) {
     pacman.bugStatus = true
   }
   if (gameBoard.dotCount == 90 && alertBool) {

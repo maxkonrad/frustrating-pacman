@@ -26,6 +26,7 @@ let timer = null;
 let gameWin = false;
 let powerPillActive = false;
 let powerPillTimer = null;
+let messageBool = true;
 
 let alertBool = true
 
@@ -162,7 +163,10 @@ function startGame() {
   }, 300000)
 
   setTimeout(() => {
+    if(messageBool){
     alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
+    }
+    messageBool = false;
   }, 150000)
   
   // Gameloop

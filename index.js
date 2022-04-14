@@ -17,7 +17,7 @@ const gameGrid = document.querySelector('#game');
 const scoreTable = document.querySelector('#score');
 const startButton = document.querySelector('#start-button');
 // Game constants
-const POWER_PILL_TIME = 3400; // ms
+const POWER_PILL_TIME = 4000; // ms
 const GLOBAL_SPEED = 80; // ms
 const gameBoard = GameBoard.createGameBoard(gameGrid, LEVEL);
 // Initial setup
@@ -73,33 +73,6 @@ function checkCollision(pacman, ghosts) {
 }
 
 function gameLoop(pacman, ghosts) {
-  // 1. Move Pacman
-  gameBoard.moveCharacter(pacman);
-  // 2. Check Ghost collision on the old positions
-  checkCollision(pacman, ghosts);
-  //2.1 Check ghost move and bugs
-  if (gameBoard.dotCount == 160) {
-    pacman.bugStatus = true
-  }
-  if (gameBoard.dotCount == 90 && alertBool) {
-    alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
-    alertBool = false
-  }
-  // 3. Move ghosts
-  ghosts.forEach((ghost) => gameBoard.moveCharacter(ghost));
-  // 4. Do a new ghost collision check on the new positions
-  checkCollision(pacman, ghosts);
-  // 5. Check if Pacman eats a dot
-  if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.DOT)) {
-
-    playAudio(soundDot);
-
-    gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.DOT]);
-    // Remove a dot
-    gameBoard.dotCount--;
-    // Add Score
-    score += 10;
-  }
   // 6. Check if Pacman eats a power pill
   if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.PILL)) {
     playAudio(soundPill);
@@ -115,10 +88,33 @@ function gameLoop(pacman, ghosts) {
       pacman.powerPill = false
     ), POWER_PILL_TIME);
   }
-  // 7. Change ghost scare mode depending on powerpill
+   // 7. Change ghost scare mode depending on powerpill
   if (pacman.powerPill != powerPillActive) {
     powerPillActive = pacman.powerPill;
     ghosts.forEach((ghost) => (ghost.isScared = pacman.powerPill));
+  }
+  // 1. Move Pacman
+  gameBoard.moveCharacter(pacman);
+  // 2. Check Ghost collision on the old positions
+  checkCollision(pacman, ghosts);
+  //2.1 Check ghost move and bugs
+  if (gameBoard.dotCount == 160) {
+    pacman.bugStatus = true
+  }
+  // 3. Move ghosts
+  ghosts.forEach((ghost) => gameBoard.moveCharacter(ghost));
+  // 4. Do a new ghost collision check on the new positions
+  checkCollision(pacman, ghosts);
+  // 5. Check if Pacman eats a dot
+  if (gameBoard.objectExist(pacman.pos, OBJECT_TYPE.DOT)) {
+
+    playAudio(soundDot);
+
+    gameBoard.removeObject(pacman.pos, [OBJECT_TYPE.DOT]);
+    // Remove a dot
+    gameBoard.dotCount--;
+    // Add Score
+    score += 10;
   }
   // 8. Check if all dots have been eaten
   if (gameBoard.dotCount === 0) {

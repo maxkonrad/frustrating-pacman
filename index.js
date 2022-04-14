@@ -158,7 +158,7 @@ function startGame() {
   // Start Research Timeout
   setTimeout(() => {
     alert("Game over. Please save the code PACMAN2022, then close this tab and return to the survey.")
-    gameGrid.remove();""
+    gameGrid.remove();
   }, 300000)
 
   setTimeout(() => {

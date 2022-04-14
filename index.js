@@ -159,6 +159,7 @@ function startGame() {
   setTimeout(() => {
     alert("Game over. Please save the code PACMAN2022, then close this tab and return to the survey.")
     gameGrid.remove();
+    startButton.remove();
   }, 300000)
 
   setTimeout(() => {

@@ -128,8 +128,11 @@ function gameLoop(pacman, ghosts) {
 }
 
 function startGame() {
+  LEVEL[84] = 7
+  LEVEL[96] = 7
+  LEVEL[376] = 7
+  LEVEL[364] = 7
   playAudio(soundGameStart);
-
   gameWin = false;
   powerPillActive = false;
   score = 0;
@@ -144,6 +147,7 @@ function startGame() {
     pacman.handleKeyInput(e, gameBoard.objectExist.bind(gameBoard))
 
   );
+
 
   const ghosts = [
     new Ghost(5, 188, huntMovement, OBJECT_TYPE.BLINKY, pacman),

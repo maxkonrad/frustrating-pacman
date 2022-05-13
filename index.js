@@ -158,7 +158,7 @@ function startGame() {
   
   // Start Research Timeouts
   setTimeout(() => {
-    alert("Game over. Please save the code PACMAN2022, then close this tab and return to the survey.")
+    alert("Thank you for playing. You may now close this window.")
     gameGrid.remove();
     startButton.remove();
   }, 300000)
@@ -168,7 +168,7 @@ function startGame() {
     alert("Message from the experimenter: Please focus on the task. For this experiment to work, it is important that you score as many points as possible! So far, you are doing worse than 95% of the participants...")
     }
     messageBool = false;
-  }, 160000)
+  }, 150100)
   
   // Gameloop
   timer = setInterval(() => gameLoop(pacman, ghosts), GLOBAL_SPEED);

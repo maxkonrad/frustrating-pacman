@@ -158,7 +158,7 @@ function startGame() {
   
   // Start Research Timeouts
   setTimeout(() => {
-    alert("Thank you for playing. You may now close this window.")
+    alert("Thank you for playing. Please press ESC and close this window.")
     gameGrid.remove();
     startButton.remove();
   }, 300000)
